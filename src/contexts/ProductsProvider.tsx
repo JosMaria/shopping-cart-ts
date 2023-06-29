@@ -23,7 +23,7 @@ export const ProductsProvider = ({ children }: ChildrenType): ReactElement => {
       const data = await fetch('http://localhost:3500/products')
         .then(response => response.json())
         .catch(error => {
-          if (error instanceof Error) 
+          if (error instanceof Error)
             console.log(error)
         })
 
@@ -33,6 +33,7 @@ export const ProductsProvider = ({ children }: ChildrenType): ReactElement => {
     fetchProducts()
       .then(products => setProducts(products))
   }, [])
+
   return (
     <ProductsContext.Provider value={{ products }}>
       {children}
