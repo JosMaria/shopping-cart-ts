@@ -1,6 +1,6 @@
-import { useState } from "react"
-import { useCart } from "../hooks"
-import { CartLineItem } from "./CartLineItem"
+import { useState } from 'react'
+import { useCart } from '../hooks'
+import MemoizedCartLineItem from './CartLineItem'
 
 export const Cart = () => {
   const [confirm, setConfirm] = useState(false)
@@ -15,10 +15,10 @@ export const Cart = () => {
     <h2>Thank you for you order.</h2>
   ) : (
     <>
-      <h2 className="offscreen">Cart</h2>
-      <ul className="cart">
+      <h2 className='offscreen'>Cart</h2>
+      <ul className='cart'>
         {cart.map(item => (
-          <CartLineItem
+          <MemoizedCartLineItem
             key={item.sku}
             item={item}
             dispatch={dispatch}
@@ -26,10 +26,10 @@ export const Cart = () => {
           />
         ))}
       </ul>
-      <div className="cart__totals">
+      <div className='cart__totals'>
         <p>Total items: {totalItems}</p>
         <p>Total price: {totalPrice}</p>
-        <button className="cart__submit" disabled={!totalItems} onClick={onSubmitOrder}>
+        <button className='cart__submit' disabled={!totalItems} onClick={onSubmitOrder}>
           Place Order
         </button>
       </div>
@@ -37,7 +37,7 @@ export const Cart = () => {
   )
 
   const content =
-    <main className="main main--cart">
+    <main className='main main--cart'>
       {pageContent}
     </main>
 

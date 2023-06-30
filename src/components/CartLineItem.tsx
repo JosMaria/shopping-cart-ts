@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { CartItemType, ReducerAction, ReducerActionType } from '../contexts'
 
 type PropsType = {
@@ -6,7 +7,7 @@ type PropsType = {
   REDUCER_ACTIONS: ReducerActionType
 }
 
-export const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropsType) => {
+const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropsType) => {
   const img: string = new URL(`../images/${item.sku}.jpg`, import.meta.url).href
   const lineTotal = item.qty * item.price
   const highestQty = 20 > item.qty ? 20 : item.qty
@@ -65,3 +66,13 @@ export const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropsType) => 
 
   return content
 }
+
+function areItemsEquals({ item: prevItem }: PropsType, { item: nextItem }: PropsType) {
+  return Object.keys(prevItem).every(key => 
+    prevItem[key as keyof CartItemType] === nextItem[key as keyof CartItemType]
+  )
+}
+
+const MemoizedCartLineItem = memo<typeof CartLineItem>(CartLineItem, areItemsEquals)
+
+export default MemoizedCartLineItem

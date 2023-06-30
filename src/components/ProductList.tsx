@@ -1,6 +1,7 @@
-import { ReactElement } from "react"
-import { useCart, useProducts } from "../hooks"
-import { Product } from "./Product"
+import { ReactElement } from 'react'
+import { useCart, useProducts } from '../hooks'
+import MemoizedProduct from './Product'
+
 
 export const ProductList = () => {
   const { dispatch, REDUCER_ACTIONS, cart } = useCart()
@@ -12,7 +13,7 @@ export const ProductList = () => {
     pageContent = products.map(product => {
       const inCart: boolean = cart.some(item => item.sku === product.sku)
       return (
-        <Product
+        <MemoizedProduct
           key={product.sku}
           product={product}
           dispatch={dispatch}
@@ -24,7 +25,7 @@ export const ProductList = () => {
   }
 
   const content = (
-    <main className="main main--products">
+    <main className='main main--products'>
       {pageContent}
     </main>
   )
